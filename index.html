@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amaury Leroux de Lens</title>
+    <meta
+      name="description"
+      content="A small home on the web for Amaury Leroux de Lens."
+    />
+    <style>
+      :root {
+        --bg: #f4f1ea;
+        --card: rgba(255, 255, 255, 0.72);
+        --text: #181714;
+        --muted: #6a655c;
+        --line: rgba(24, 23, 20, 0.1);
+        --accent: #ffe956;
+        --shadow: 0 18px 48px rgba(30, 26, 20, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      main {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 32px;
+      }
+
+      .card {
+        position: relative;
+        width: min(720px, 100%);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        background: var(--card);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+      }
+
+      .header {
+        padding: 24px 40px 28px;
+        background: #1f2529;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin: 0 0 20px;
+        padding: 6px 10px 6px 0;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: none;
+        color: #f7f7f3;
+      }
+
+      .identity {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .identity-copy {
+        display: block;
+      }
+
+      .content {
+        padding: 28px 40px 40px;
+      }
+
+      .avatar {
+        width: 92px;
+        height: 92px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+      }
+
+      h1 {
+        margin: 0;
+        font-family: Inter, "Avenir Next", "Segoe UI", sans-serif;
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+        font-weight: 650;
+        color: #f7f7f3;
+      }
+
+      h1 span {
+        display: block;
+        color: var(--accent);
+      }
+
+      .intro {
+        position: relative;
+        z-index: 1;
+        max-width: 36rem;
+        margin: 0 0 28px;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 132px;
+        padding: 14px 18px;
+        border: 1px solid rgba(30, 27, 22, 0.1);
+        border-radius: 999px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        font-weight: 700;
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background-color 180ms ease;
+      }
+
+      .links a:hover,
+      .links a:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(47, 93, 80, 0.26);
+        background: #ffffff;
+      }
+
+      .footer {
+        margin-top: 28px;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .highlights {
+        margin-top: 28px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .highlight {
+        padding: 0;
+      }
+
+      .highlight strong {
+        display: block;
+        margin-bottom: 3px;
+        font-size: 0.98rem;
+        color: var(--text);
+      }
+
+      .highlight span {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 18px;
+        }
+
+        .card {
+          border-radius: 24px;
+        }
+
+        .header {
+          padding: 20px 22px 22px;
+        }
+
+        .identity {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .content {
+          padding: 22px;
+        }
+
+        .links a {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card" aria-label="Personal homepage">
+        <div class="header">
+          <p class="eyebrow">Amaury Leroux de Lens</p>
+
+          <div class="identity">
+            <img
+              class="avatar"
+              src="me.jpg"
+              alt="Portrait of Amaury Leroux de Lens"
+              width="92"
+              height="92"
+            />
+
+            <div class="identity-copy">
+              <h1>
+                Technology
+                <span>x business.</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <nav class="links" aria-label="Social links">
+            <a href="https://twitter.com/amo__" rel="me">@amo__ on X</a>
+            <a href="https://www.linkedin.com/in/amaurylerouxdelens/" rel="me">LinkedIn</a>
+            <a href="https://github.com/Amo" rel="me">GitHub</a>
+          </nav>
+
+          <section class="highlights" aria-label="Professional background">
+            <div class="highlight">
+              <strong>Engineering & Technology Leader</strong>
+              <span>18+ years of experience across software architecture, team leadership, organizational transformation, and an entrepreneurial mindset.</span>
+            </div>
+            <div class="highlight">
+              <strong>Scale-ups and critical platforms</strong>
+              <span>A new chapter is starting, following leadership roles at Driveco, Doctolib, Mention, and Splio in product-heavy and operationally demanding environments.</span>
+            </div>
+            <div class="highlight">
+              <strong>Technology strategy for the business</strong>
+              <span>Technology vision, architecture decisions, and modernization efforts shaped to improve business performance, delivery speed, and operational resilience.</span>
+            </div>
+          </section>
+
+          <p class="footer">Amaury Leroux de Lens, 2026</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
