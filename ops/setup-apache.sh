@@ -7,12 +7,18 @@ upstream_port="${2:?upstream port required}"
 site_conf="/etc/apache2/sites-available/${domain}.conf"
 ssl_conf="/etc/apache2/sites-available/${domain}-le-ssl.conf"
 
-if [[ -f "${ssl_conf}" ]]; then
+default_cert_file="/etc/letsencrypt/live/${domain}/fullchain.pem"
+default_cert_key_file="/etc/letsencrypt/live/${domain}/privkey.pem"
+
+if [[ -f "${default_cert_file}" && -f "${default_cert_key_file}" ]]; then
+  cert_file="${default_cert_file}"
+  cert_key_file="${default_cert_key_file}"
+elif [[ -f "${ssl_conf}" ]]; then
   cert_file="$(awk '/SSLCertificateFile/ { print $2; exit }' "${ssl_conf}")"
   cert_key_file="$(awk '/SSLCertificateKeyFile/ { print $2; exit }' "${ssl_conf}")"
 else
-  cert_file="/etc/letsencrypt/live/${domain}/fullchain.pem"
-  cert_key_file="/etc/letsencrypt/live/${domain}/privkey.pem"
+  cert_file="${default_cert_file}"
+  cert_key_file="${default_cert_key_file}"
 fi
 
 cat > "${site_conf}" <<EOF
