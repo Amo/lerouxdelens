@@ -2,10 +2,10 @@ APP_NAME := lerouxdelens
 REMOTE_DOMAIN := lerouxdelens.com
 LOCAL_DOMAIN := lerouxdelens.test
 LOCAL_IMAGE := nginx:1.27-alpine
-REMOTE_HOST := debian@vps
-REMOTE_PORT := 55055
-REMOTE_DIR := /home/debian/apps/$(APP_NAME)
-REMOTE_HTTP_PORT := 8091
+REMOTE_HOST := vps2
+REMOTE_PORT := 22
+REMOTE_DIR := /home/ops/apps/$(APP_NAME)
+REMOTE_HTTP_PORT := 8094
 CONTAINER_NAME := $(APP_NAME)-prod
 LOCAL_CONTAINER_NAME := $(APP_NAME)-local
 IMAGE_NAME := $(APP_NAME)
@@ -41,4 +41,4 @@ deploy: check-clean
 	@ssh $(REMOTE_HOST) -p $(REMOTE_PORT) "mkdir -p '$(REMOTE_DIR)/releases'"
 	@scp -P $(REMOTE_PORT) "$(ARCHIVE)" $(REMOTE_HOST):"$(REMOTE_RELEASE_DIR).tar.gz"
 	@rm -f "$(ARCHIVE)"
-	@ssh $(REMOTE_HOST) -p $(REMOTE_PORT) "set -eu; mkdir -p '$(REMOTE_RELEASE_DIR)'; tar -xzf '$(REMOTE_RELEASE_DIR).tar.gz' -C '$(REMOTE_RELEASE_DIR)'; rm -f '$(REMOTE_RELEASE_DIR).tar.gz'; sudo -n docker build -t '$(IMAGE_NAME):$(COMMIT_SHA)' '$(REMOTE_RELEASE_DIR)'; sudo -n docker rm -f '$(CONTAINER_NAME)' >/dev/null 2>&1 || true; sudo -n docker run -d --restart unless-stopped --name '$(CONTAINER_NAME)' -p 127.0.0.1:$(REMOTE_HTTP_PORT):80 '$(IMAGE_NAME):$(COMMIT_SHA)' >/dev/null; sudo -n bash '$(REMOTE_RELEASE_DIR)/ops/setup-apache.sh' '$(REMOTE_DOMAIN)' '$(REMOTE_HTTP_PORT)'; sudo -n docker image prune -f >/dev/null"
+	@ssh $(REMOTE_HOST) -p $(REMOTE_PORT) "set -eu; mkdir -p '$(REMOTE_RELEASE_DIR)'; tar -xzf '$(REMOTE_RELEASE_DIR).tar.gz' -C '$(REMOTE_RELEASE_DIR)'; rm -f '$(REMOTE_RELEASE_DIR).tar.gz'; sudo -n docker build -t '$(IMAGE_NAME):$(COMMIT_SHA)' '$(REMOTE_RELEASE_DIR)'; sudo -n docker rm -f '$(CONTAINER_NAME)' >/dev/null 2>&1 || true; sudo -n docker run -d --restart unless-stopped --name '$(CONTAINER_NAME)' -p 127.0.0.1:$(REMOTE_HTTP_PORT):80 '$(IMAGE_NAME):$(COMMIT_SHA)' >/dev/null; sudo -n nginx -t >/dev/null; sudo -n systemctl reload nginx; sudo -n docker image prune -f >/dev/null"

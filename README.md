@@ -25,7 +25,7 @@ shows local file changes immediately.
 ## Deploy
 
 Production deploys are built from the current `HEAD` commit and pushed straight
-to `vps` over SSH:
+to `vps2` over SSH:
 
 ```sh
 make deploy
